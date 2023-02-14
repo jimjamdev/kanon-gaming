@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import type { PageProps } from '@/types/common/page.type';
 import { AppLayout } from '@/components/layouts/app';
-import { store } from '@/store/iindex';
+import { store } from '@/store';
 
 export type ApplicationType = AppProps & {
   Component: PageProps;

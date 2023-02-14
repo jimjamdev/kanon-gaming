@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useGetGamesQuery } from '@/store/games';
+import { config } from '@/config';
 // import Image from 'next/image';
 // import { Inter } from '@next/font/google';
 
@@ -22,6 +23,7 @@ export default function Home(): JSX.Element {
       <h1 className="font-bold bg-orange-500 text-fuchsia-50 uppercase p-2.5 text-4xl text-center">
         Hello there!
       </h1>
+      <pre>{JSON.stringify(config, null, 2)}</pre>
       <pre>{JSON.stringify(games, null, 2)}</pre>
     </>
   );

@@ -3,14 +3,14 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import type { Games } from '@/types/games.types';
 import { config } from '@/config';
 
-export const gamesApi = createApi({
-  reducerPath: 'games',
+export const slotsApi = createApi({
+  reducerPath: 'slots',
   baseQuery: fetchBaseQuery({ baseUrl: config.apiUrl }),
   endpoints: (builder) => ({
-    getGames: builder.query<Games, void>({
-      query: () => `games`,
+    getSlots: builder.query<Games, void>({
+      query: () => `slots`,
     }),
   }),
 });
 
-export const { useGetGamesQuery } = gamesApi;
+export const { useGetSlotsQuery } = slotsApi;
