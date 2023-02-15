@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import { useGetGamesQuery } from '@/store/games';
-import { config } from '@/config';
+// import { useGetGamesQuery } from '@/store/games';
+// import { config } from '@/config';
 import { SlotsGame } from '@/features/games/slots';
 // import Image from 'next/image';
 // import { Inter } from '@next/font/google';
@@ -9,7 +9,7 @@ import { SlotsGame } from '@/features/games/slots';
 
 // eslint-disable-next-line import/no-default-export
 export default function Home(): JSX.Element {
-  const { data: games } = useGetGamesQuery();
+  // const { data: games } = useGetGamesQuery();
   return (
     <>
       <Head>
