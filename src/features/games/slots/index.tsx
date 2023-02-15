@@ -3,8 +3,9 @@ import { useSlots } from '../hooks/use-slots';
 
 export function SlotsGame() {
   const { data, isLoading, error } = useGetSlotsQuery();
-  const { slots, spin, win, availableCredits, message } = useSlots({
-    slotList: data?.data || [],
+  const { data: slotList } = data || {};
+  const { slots, spin, isWin, availableCredits, message } = useSlots({
+    slotList,
   });
 
   if (error) {
@@ -28,8 +29,8 @@ export function SlotsGame() {
         Spin
       </button>
       credits: {availableCredits}
-      <div className="text-red-500">{message}</div>
-      <p>win: {win() ? 'true' : 'false'}</p>
+      <div className="text-red-500">{message?.text}</div>
+      <p>win: {isWin ? 'true' : 'false'}</p>
     </div>
   );
 }
