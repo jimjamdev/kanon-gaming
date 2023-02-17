@@ -1,7 +1,7 @@
 import Head from 'next/head';
 // import { useGetGamesQuery } from '@/store/games';
 // import { config } from '@/config';
-import { SlotsGame } from '@/features/games/slots';
+import { SlotsGame } from '@/features/games/slots-game';
 // import Image from 'next/image';
 // import { Inter } from '@next/font/google';
 
@@ -13,7 +13,7 @@ export default function Home(): JSX.Element {
   return (
     <>
       <Head>
-        <title>Kanon Gaming</title>
+        <title>Kanon Gaming - Play Games & Win Big</title>
         <meta
           content="My Kanon is loaded and ready to fire!"
           name="description"
