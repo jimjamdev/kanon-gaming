@@ -1,4 +1,5 @@
 import { useGetSlotsQuery } from '@/store/slots';
+import { Button } from '@/ui/button/button';
 import { useSlots } from '../hooks/use-slots';
 
 export function SlotsGame() {
@@ -81,13 +82,13 @@ export function SlotsGame() {
         })}
       </div>*/}
       <pre>{JSON.stringify(reel)}</pre>
-      <button
+      <Button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         onClick={handleSpin}
         type="button"
       >
         Spin
-      </button>
+      </Button>
       credits: {availableCredits}
       <div className="text-red-500">{message?.text}</div>
       <p>win: {isWin ? 'true' : 'false'}</p>

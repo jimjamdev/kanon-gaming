@@ -31,7 +31,6 @@ export function useSlots({
 
   /* We spin the reel, check for wins and  */
   const handleSpin = debounce(() => {
-    if (!slotList) return;
     if (!hasAvailableCredits) {
       setMessage({ type: 'error', text: 'Not enough credits' });
       return;

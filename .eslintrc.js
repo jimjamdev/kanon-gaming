@@ -29,4 +29,9 @@ module.exports = {
   globals: {
     JSX: 'readonly',
   },
+  overrides: [
+    {
+      files: ['src/**/*.{ts,tsx}'],
+    },
+  ],
 };
