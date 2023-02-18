@@ -1,3 +1,7 @@
+const env = process.env;
+
 export const config = {
-  apiUrl: `${process.env.VERCEL_URL || 'http://localhost:3000'}/api/`,
+  apiUrl: `${
+    env.VERCEL_URL || env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+  }/api/`,
 };
