@@ -1,3 +1,5 @@
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+
 export interface Game {
   id: number;
   slug: string;
@@ -9,7 +11,7 @@ export interface Game {
 }
 
 export interface Games {
-  data: Game[];
-  isLoading: boolean;
-  error: { message: string; code: number } | null;
+  data?: Game[];
+  isLoading?: boolean;
+  error?: FetchBaseQueryError;
 }

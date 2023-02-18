@@ -9,6 +9,7 @@ module.exports = {
     require.resolve('@vercel/style-guide/eslint/typescript'),
     require.resolve('@vercel/style-guide/eslint/browser'),
     require.resolve('@vercel/style-guide/eslint/react'),
+    'plugin:react-hooks/recommended',
     require.resolve('@vercel/style-guide/eslint/next'),
   ],
   rules: {
@@ -28,4 +29,9 @@ module.exports = {
   globals: {
     JSX: 'readonly',
   },
+  overrides: [
+    {
+      files: ['src/**/*.{ts,tsx}'],
+    },
+  ],
 };
