@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useState } from 'react';
 import { useGetGamesQuery } from '@/store/games';
 // import { config } from '@/config';
 import { SlotsGame } from '@/features/games/slots-game';
@@ -11,9 +12,10 @@ import { useFilterData } from '@/hooks/use-filter-data';
 // eslint-disable-next-line import/no-default-export
 export default function Home(): JSX.Element {
   const { data: games } = useGetGamesQuery();
+  const [searchQuery, setSearchQuery] = useState('');
   const { filteredData } = useFilterData({
     data: games?.data as [],
-    search: 'legacy',
+    search: searchQuery,
   });
   return (
     <>
@@ -36,6 +38,10 @@ export default function Home(): JSX.Element {
         Hello there!
       </h1>
       <SlotsGame />
+      <input
+        onInput={(e) => setSearchQuery(e.currentTarget.value)}
+        type="text"
+      />
       <pre>{JSON.stringify(filteredData, null, 2)}</pre>
     </>
   );
