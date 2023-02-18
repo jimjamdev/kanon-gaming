@@ -1,19 +1,15 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import { useGetGamesQuery } from '@/store/games';
-// import { config } from '@/config';
 import { SlotsGame } from '@/features/games/slots-game';
 import { useFilterData } from '@/hooks/use-filter-data';
-// import Image from 'next/image';
-// import { Inter } from '@next/font/google';
-
-// const inter = Inter({ subsets: ['latin'] });
+import { GameThumbnail } from '@/components/game-thumbnail';
 
 // eslint-disable-next-line import/no-default-export
 export default function Home(): JSX.Element {
   const { data: games } = useGetGamesQuery();
   const [searchQuery, setSearchQuery] = useState('');
-  const { filteredData } = useFilterData({
+  const { filteredData: gamesList } = useFilterData({
     data: games?.data as [],
     search: searchQuery,
   });
@@ -34,15 +30,17 @@ export default function Home(): JSX.Element {
         />
         <link href="/favicon.ico" rel="icon" />
       </Head>
-      <h1 className="font-bold bg-orange-500 text-fuchsia-50 uppercase p-2.5 text-4xl text-center">
-        Hello there!
-      </h1>
       <SlotsGame />
       <input
         onInput={(e) => setSearchQuery(e.currentTarget.value)}
         type="text"
       />
-      <pre>{JSON.stringify(filteredData, null, 2)}</pre>
+      <h2>GameList</h2>
+      <div>
+        {gamesList.map((game) => {
+          return <GameThumbnail key={game.title} {...game} />;
+        })}
+      </div>
     </>
   );
 }
