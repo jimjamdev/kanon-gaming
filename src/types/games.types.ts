@@ -1,12 +1,12 @@
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 export interface Game {
-  id: number;
-  slug: string;
-  title: string;
-  providerName: string;
-  thumb: {
-    url: string;
+  id?: number;
+  slug?: string;
+  title?: string;
+  providerName?: string;
+  thumb?: {
+    url?: string;
   };
 }
 

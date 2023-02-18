@@ -9,8 +9,8 @@ import { GameThumbnail } from '@/components/game-thumbnail';
 export default function Home(): JSX.Element {
   const { data: games } = useGetGamesQuery();
   const [searchQuery, setSearchQuery] = useState('');
-  const { filteredData: gamesList } = useFilterData({
-    data: games?.data as [],
+  const { filteredData: gamesList = [] } = useFilterData({
+    data: games?.data,
     search: searchQuery,
   });
   return (
@@ -38,7 +38,7 @@ export default function Home(): JSX.Element {
       <h2>GameList</h2>
       <div>
         {gamesList.map((game) => {
-          return <GameThumbnail key={game.title} {...game} />;
+          return <GameThumbnail key={game?.title} {...game} />;
         })}
       </div>
     </>
