@@ -1,26 +1,12 @@
-import type { Slot } from '../hooks/use-slots';
+export function winsInReel({ reel = [] }: { reel?: string[] }) {
+  if (reel.length && !Array.isArray(reel)) {
+    return;
+  }
 
-export function winsInReel({
-  reel,
-  winMatchAwards,
-}: {
-  reel?: string[];
-  winMatchAwards?: Slot['winMatchAwards'];
-}) {
-  // return the name and total count of matching words in a row in a reel
-  const wins = reel?.reduce(
-    (acc, item, index, array) => {
-      const nextItem = array[index + 1];
-
-      if (item === nextItem) {
-        acc.count += index + 1;
-        acc.name = item;
-      }
-
-      return acc;
-    },
-    { count: 0, name: '' },
-  );
-
-  return wins;
+  if (reel[0] === reel[1] && reel[1] === reel[2]) {
+    return { count: 3, symbol: reel[0] };
+  } else if (reel[0] === reel[1] || reel[1] === reel[2]) {
+    return { count: 2, symbol: reel[1] };
+  }
+  return { count: 0, symbol: '' };
 }
