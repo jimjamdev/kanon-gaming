@@ -1,16 +1,17 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { useGetGamesQuery } from '@/store/games';
+import { getGames, useGetGamesQuery } from '@/store/games';
 import { SlotsGame } from '@/features/games/slots-game';
 import { useFilterData } from '@/hooks/use-filter-data';
 import { GameThumbnail } from '@/components/game-thumbnail';
+import type { Games } from '@/types/games.types';
 
 // eslint-disable-next-line import/no-default-export
-export default function Home(): JSX.Element {
-  const { data: games } = useGetGamesQuery();
+export default function Home({ games }: { games: Games }): JSX.Element {
+  const { data } = useGetGamesQuery();
   const [searchQuery, setSearchQuery] = useState('');
   const { filteredData: gamesList = [] } = useFilterData({
-    data: games?.data,
+    data: data?.data || games.data,
     search: searchQuery,
   });
   return (
@@ -43,4 +44,15 @@ export default function Home(): JSX.Element {
       </div>
     </>
   );
+}
+
+export async function getStaticProps() {
+  // @ts-expect-error - TODO: Fix this
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const games: Games = await getGames();
+  return {
+    props: {
+      games,
+    },
+  };
 }

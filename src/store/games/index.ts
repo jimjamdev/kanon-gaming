@@ -14,3 +14,4 @@ export const gamesApi = createApi({
 });
 
 export const { useGetGamesQuery } = gamesApi;
+export const { getGames } = gamesApi.endpoints;
