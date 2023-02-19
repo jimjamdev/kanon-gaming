@@ -1,10 +1,11 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { getGames, useGetGamesQuery } from '@/store/games';
+import { useGetGamesQuery } from '@/store/games';
 import { SlotsGame } from '@/features/games/slots-game';
 import { useFilterData } from '@/hooks/use-filter-data';
 import { GameThumbnail } from '@/components/game-thumbnail';
 import type { Games } from '@/types/games.types';
+import { config } from '@/config';
 
 // eslint-disable-next-line import/no-default-export
 export default function Home({ games = { data: []} }: { games: Games }): JSX.Element {
@@ -47,15 +48,10 @@ export default function Home({ games = { data: []} }: { games: Games }): JSX.Ele
 }
 
 export async function getServerSideProps() {
-  // @ts-expect-error - TODO: Fix this
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const res: Games = await getGames();
-  // @ts-expect-error - TODO: Fix this
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
-  const games: Games = res.json();
+  const games: Response = await fetch(`${config.apiUrl}games`);
   return {
     props: {
-      games,
+      games: JSON.parse(JSON.stringify(games)) as Games,
     },
   };
 
