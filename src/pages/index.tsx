@@ -7,7 +7,7 @@ import { GameThumbnail } from '@/components/game-thumbnail';
 import type { Games } from '@/types/games.types';
 
 // eslint-disable-next-line import/no-default-export
-export default function Home({ games }: { games: Games }): JSX.Element {
+export default function Home({ games = { data: []} }: { games: Games }): JSX.Element {
   const { data } = useGetGamesQuery();
   const [searchQuery, setSearchQuery] = useState('');
   const { filteredData: gamesList = [] } = useFilterData({
@@ -46,13 +46,17 @@ export default function Home({ games }: { games: Games }): JSX.Element {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // @ts-expect-error - TODO: Fix this
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const games: Games = await getGames();
+  const res: Games = await getGames();
+  // @ts-expect-error - TODO: Fix this
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
+  const games: Games = res.json();
   return {
     props: {
       games,
     },
   };
+
 }
