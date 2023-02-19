@@ -5,8 +5,6 @@ import { SlotsGame } from '@/features/games/slots-game';
 import { useFilterData } from '@/hooks/use-filter-data';
 import { GameThumbnail } from '@/components/game-thumbnail';
 import type { Games } from '@/types/games.types';
-import { config } from '@/config';
-
 // eslint-disable-next-line import/no-default-export
 export default function Home({ games = { data: []} }: { games: Games }): JSX.Element {
   const { data } = useGetGamesQuery();
@@ -48,7 +46,7 @@ export default function Home({ games = { data: []} }: { games: Games }): JSX.Ele
 }
 
 export async function getServerSideProps() {
-  const games: Response = await fetch(`${config.apiUrl}games`);
+  const games: Response = await fetch(`https://kanon-gaming.vercel.app/api/games`);
   return {
     props: {
       games: JSON.parse(JSON.stringify(games)) as Games,
