@@ -1,4 +1,4 @@
-import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import type { ErrorType } from '@/types/common/error.types';
 
 export interface Game {
   id?: number;
@@ -13,5 +13,5 @@ export interface Game {
 export interface Games {
   data?: Game[];
   isLoading?: boolean;
-  error?: FetchBaseQueryError;
+  error?: ErrorType;
 }

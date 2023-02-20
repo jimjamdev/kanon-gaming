@@ -1,18 +1,17 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { useGetGamesQuery } from '@/store/games';
 import { SlotsGame } from '@/features/games/slots-game';
 import { useFilterData } from '@/hooks/use-filter-data';
 import { GameThumbnail } from '@/components/game-thumbnail';
-import type { Games } from '@/types/games.types';
+import { wrapper } from '@/store';
+import { getGames, useGetGamesQuery } from '@/store/api/games';
 // eslint-disable-next-line import/no-default-export
-export default function Home({ games = { data: []} }: { games: Games }): JSX.Element {
-  const { data } = useGetGamesQuery();
+export default function Home() {
+  const { data: games, isLoading } = useGetGamesQuery();
   const [searchQuery, setSearchQuery] = useState('');
-  const { filteredData: gamesList = [] } = useFilterData({
-    data: data?.data || games.data,
-    search: searchQuery,
-  });
+  // @ts-expect-error - We've set a generic type
+  const filteredData = useFilterData(games, searchQuery);
+
   return (
     <>
       <Head>
@@ -36,21 +35,24 @@ export default function Home({ games = { data: []} }: { games: Games }): JSX.Ele
         type="text"
       />
       <h2>GameList</h2>
+      {isLoading ? <p>Loading...</p> : null}
+      {filteredData?.length === 0 ? <p>No games found</p> : null}
       <div>
-        {gamesList.map((game) => {
-          return <GameThumbnail key={game?.title} {...game} />;
+        {filteredData?.map((game) => {
+          // @ts-expect-error - Vercel TS too strict
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          return <GameThumbnail key={game.id} {...game} />;
         })}
       </div>
     </>
   );
 }
 
-export async function getServerSideProps() {
-  const games: Response = await fetch(`https://kanon-gaming.vercel.app/api/games`);
-  return {
-    props: {
-      games: JSON.parse(JSON.stringify(games)) as Games,
-    },
-  };
-
-}
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async () => {
+    await store.dispatch(getGames.initiate());
+    return {
+      props: {},
+    };
+  },
+);

@@ -1,8 +1,3 @@
 export const config = {
-  apiUrl: `${
-    process.env.VERCEL_URL ||
-    process.env.API_URL ||
-    process.env.NEXT_PUBLIC_API_URL ||
-    'http://localhost:3000'
-  }/api/`,
+  apiUrl: 'https://63f3da27fe3b595e2eea2dc8.mockapi.io/',
 };

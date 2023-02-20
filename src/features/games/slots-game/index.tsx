@@ -1,10 +1,10 @@
-import { useGetSlotsQuery } from '@/store/slots';
+import { useGetSlotsQuery } from '@/store/api/slots';
 import { Button } from '@/ui/button/button';
 import { useSlots } from '../hooks/use-slots';
 
 export function SlotsGame() {
-  const { data, isLoading, error } = useGetSlotsQuery();
-  const { data: slotList } = data || {};
+  const { data } = useGetSlotsQuery();
+
   const {
     handleSpin,
     isWin,
@@ -18,7 +18,7 @@ export function SlotsGame() {
     totalLosses,
     roundLossAmount,
   } = useSlots({
-    slotList,
+    slotList: data,
     creditsAmount: 20,
     creditCostPerSpin: 1,
     winMatchAwards: {
@@ -40,14 +40,6 @@ export function SlotsGame() {
       },
     },
   });
-
-  if (error) {
-    return <div>{JSON.stringify(error)}</div>;
-  }
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>

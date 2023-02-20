@@ -1,7 +1,7 @@
-import type { MatchRewards } from '@/types/slots.types';
+import type { MatchRewards, Slots } from '@/types/slots.types';
 
 export interface UseSlot {
-  slotList?: string[][];
+  slotList?: Slots;
   creditsAmount?: number;
   creditCostPerSpin?: number;
   winMatchAwards: MatchRewards;
