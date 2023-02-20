@@ -36,4 +36,4 @@ setupListeners(makeStore().dispatch);
 /* We export store to be able to use it in tests, and functions */
 export { store };
 
-export const wrapper = createWrapper<AppStore>(makeStore, { debug: false });
+export const wrapper = createWrapper<AppStore>(makeStore, { debug: true });

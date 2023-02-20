@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
-import { Inter } from '@next/font/google';
+// import { Inter } from '@next/font/google';
 import { AppHeader } from '@/components/layouts/app/header';
 
-const inter = Inter({ subsets: ['latin'] });
+// const inter = Inter({ subsets: ['latin'] });
 
 export interface AppLayoutProps {
   children: ReactNode;
@@ -10,7 +10,7 @@ export interface AppLayoutProps {
 
 export function AppLayout({ children }: AppLayoutProps) {
   return (
-    <main className={[inter.className, 'grid'].join(' ')}>
+    <main className={['grid'].join(' ')}>
       <AppHeader />
       {children}
     </main>

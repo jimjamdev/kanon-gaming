@@ -7,10 +7,11 @@ import { wrapper } from '@/store';
 import { getGames, useGetGamesQuery } from '@/store/api/games';
 // eslint-disable-next-line import/no-default-export
 export default function Home() {
-  const { data: games } = useGetGamesQuery();
+  const { data: games, isLoading } = useGetGamesQuery();
   const [searchQuery, setSearchQuery] = useState('');
   // @ts-expect-error - We've set a generic type
   const filteredData = useFilterData(games, searchQuery);
+
   return (
     <>
       <Head>
@@ -34,12 +35,13 @@ export default function Home() {
         type="text"
       />
       <h2>GameList</h2>
-      <pre>{JSON.stringify(games)}</pre>
-      <h2>FilteredData</h2>
-      <pre>{JSON.stringify(filteredData)}</pre>
+      {isLoading ? <p>Loading...</p> : null}
+      {filteredData?.length === 0 ? <p>No games found</p> : null}
       <div>
-        {games?.data?.map((game) => {
-          return <GameThumbnail key={game.title} {...game} />;
+        {filteredData?.map((game) => {
+          // @ts-expect-error - Vercel TS too strict
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          return <GameThumbnail key={game.id} {...game} />;
         })}
       </div>
     </>
