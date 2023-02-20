@@ -5,6 +5,14 @@ const withPWA = require('next-pwa')({
 
 const settings = {
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net',
+      }
+    ],
+  }
 };
 
 module.exports =

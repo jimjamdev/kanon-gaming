@@ -7,6 +7,7 @@ import { GameThumbnail } from '@/components/game-thumbnail';
 import type { Games } from '@/types/games.types';
 // eslint-disable-next-line import/no-default-export
 export default function Home({ games = { data: []} }: { games: Games }): JSX.Element {
+  console.log('SSRGames', games);
   const { data } = useGetGamesQuery();
   const [searchQuery, setSearchQuery] = useState('');
   const { filteredData: gamesList = [] } = useFilterData({
