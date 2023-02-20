@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export function AppHeader() {
   return (
@@ -14,9 +15,8 @@ export function AppHeader() {
           Kanon Gaming
         </h1>
         <nav className="flex space-x-4">
-          <a href="/">Home</a>
-          <a href="/games">Games</a>
-          <a href="/about">About</a>
+          <Link href="/">Home</Link>
+          <Link href="/game">Games</Link>
         </nav>
       </div>
     </header>
