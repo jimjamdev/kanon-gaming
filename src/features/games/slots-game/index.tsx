@@ -1,5 +1,6 @@
 import { useGetSlotsQuery } from '@/store/api/slots';
-import { Button } from '@/ui/button/button';
+import { Button } from '@/ui/components/button/button';
+import type { Slots } from '@/types/slots.types';
 import { useSlots } from '../hooks/use-slots';
 
 export function SlotsGame() {
@@ -18,7 +19,7 @@ export function SlotsGame() {
     totalLosses,
     roundLossAmount,
   } = useSlots({
-    slotList: data,
+    slotList: data as Slots['data'],
     creditsAmount: 20,
     creditCostPerSpin: 1,
     winMatchAwards: {

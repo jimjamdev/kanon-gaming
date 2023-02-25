@@ -1,17 +1,10 @@
 import Head from 'next/head';
-import { useState } from 'react';
 import { SlotsGame } from '@/features/games/slots-game';
-import { useFilterData } from '@/hooks/use-filter-data';
-import { GameThumbnail } from '@/components/game-thumbnail';
 import { wrapper } from '@/store';
-import { getGames, useGetGamesQuery } from '@/store/api/games';
+import { getGames } from '@/store/api/games';
+import { GameList } from '@/features/game-list';
 // eslint-disable-next-line import/no-default-export
 export default function Home() {
-  const { data: games, isLoading } = useGetGamesQuery();
-  const [searchQuery, setSearchQuery] = useState('');
-  // @ts-expect-error - We've set a generic type
-  const filteredData = useFilterData(games, searchQuery);
-
   return (
     <>
       <Head>
@@ -30,20 +23,7 @@ export default function Home() {
         <link href="/favicon.ico" rel="icon" />
       </Head>
       <SlotsGame />
-      <input
-        onInput={(e) => setSearchQuery(e.currentTarget.value)}
-        type="text"
-      />
-      <h2>GameList</h2>
-      {isLoading ? <p>Loading...</p> : null}
-      {filteredData?.length === 0 ? <p>No games found</p> : null}
-      <div>
-        {filteredData?.map((game) => {
-          // @ts-expect-error - Vercel TS too strict
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          return <GameThumbnail key={game.id} {...game} />;
-        })}
-      </div>
+      <GameList />
     </>
   );
 }

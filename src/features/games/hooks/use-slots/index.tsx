@@ -7,7 +7,7 @@ import { calculateWinnings } from '@/features/games/utils/calculate-winnings';
 type WinMatchAwards = Record<string, Record<number, number>>;
 
 interface UseSlotsProps {
-  slotList: string[][];
+  slotList?: string[][];
   creditsAmount: number;
   creditCostPerSpin: number;
   winMatchAwards: WinMatchAwards;

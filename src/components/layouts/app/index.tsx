@@ -17,7 +17,7 @@ export function AppLayout({ children }: AppLayoutProps) {
     <main className={styles.layout}>
       <AppHeader className={styles.header} />
       <Sidebar className={styles.sidebar} />
-      <Main>{children}</Main>
+      <Main className={styles.main}>{children}</Main>
       <Footer className={styles.footer} />
     </main>
   );
