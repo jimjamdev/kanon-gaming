@@ -88,8 +88,6 @@ export function useSlots({
     };
     const credits = calculateWinningsCallback(wins);
 
-    console.log('wins', wins.count);
-
     if (wins.count) {
       setIsWin(true);
       setRoundWinAmount(credits);
