@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export function AppHeader() {
+export function AppHeader({ className }: { className?: string }) {
   return (
-    <header>
+    <header className={className}>
       <div className="flex items-center justify-between bg-gray-800 text-white p-4">
         <h1 className="text-2xl">
           <Image

@@ -23,18 +23,22 @@ export function SlotsGame() {
     creditCostPerSpin: 1,
     winMatchAwards: {
       cherry: {
+        0: 0,
         2: 40,
         3: 50,
       },
       lemon: {
+        0: 0,
         2: 20,
         3: 30,
       },
       apple: {
+        0: 0,
         2: 10,
         3: 20,
       },
       banana: {
+        0: 0,
         2: 5,
         3: 15,
       },
