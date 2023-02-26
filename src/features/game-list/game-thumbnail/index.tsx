@@ -12,10 +12,17 @@ export function GameThumbnail({
   slug,
 }: GameThumbnailProps) {
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center aspect-square">
       <h4>{title}</h4>
       {providerName}
-      <Image alt={title || ''} height={280} priority src={thumb?.url ? `https:${thumb.url}` : '/vercel.svg'} width={280} />
+      <Image
+        alt={title || ''}
+        className="aspect-square"
+        height={280}
+        priority
+        src={thumb?.url ? `https:${thumb.url}` : '/vercel.svg'}
+        width={280}
+      />
       {slug}
     </div>
   );
