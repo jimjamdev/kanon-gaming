@@ -5,14 +5,18 @@
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr auto;
     grid-template-areas:
-            "header header"
+            "sidebar header"
             "sidebar main"
-            "footer footer";
+            "sidebar footer";
     min-height: 100svh;
+    position: relative;
 }
 
 .header {
     grid-area: header;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .sidebar {

@@ -14,11 +14,11 @@ export interface AppLayoutProps {
 
 export function AppLayout({ children }: AppLayoutProps) {
   return (
-    <main className={styles.layout}>
+    <div className={styles.layout}>
       <AppHeader className={styles.header} />
       <Sidebar className={styles.sidebar} />
       <Main className={styles.main}>{children}</Main>
       <Footer className={styles.footer} />
-    </main>
+    </div>
   );
 }
