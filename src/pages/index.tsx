@@ -33,11 +33,9 @@ export default function Home() {
   );
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async () => {
-    await store.dispatch(getGames.initiate());
-    return {
-      props: {},
-    };
-  },
-);
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+  await store.dispatch(getGames.initiate());
+  return {
+    props: {},
+  };
+});
