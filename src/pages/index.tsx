@@ -3,6 +3,7 @@ import { SlotsGame } from '@/features/games/slots-game';
 import { wrapper } from '@/store';
 import { getGames } from '@/store/api/games';
 import { GameList } from '@/features/game-list';
+import { Banner } from '@/components/banner';
 // eslint-disable-next-line import/no-default-export
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
         />
         <link href="/favicon.ico" rel="icon" />
       </Head>
+      <Banner />
       <SlotsGame />
       <GameList />
     </>
