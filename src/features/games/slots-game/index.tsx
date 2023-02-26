@@ -49,35 +49,6 @@ export function SlotsGame() {
   return (
     <div>
       <h1>Slots</h1>
-      {/*<div className="grid grid-cols-3">
-        {slots?.map((reelColumn, index) => {
-          return (
-            <div>
-              {reelColumn.map((fruit) => {
-                return (
-                  <motion.div
-                    className="bg-blue-500"
-                    key={`${fruit}-${index}`}
-                    layout
-                  >
-                    {fruit}
-                  </motion.div>
-                );
-              })}
-            </div>
-          );
-        })}
-      </div>*/}
-      {/*<div className="text-pink-700">{JSON.stringify(slots, null, 2)}</div>
-      <div>
-        {reel?.map((item) => {
-          return (
-            <div className="bg-red-500" key={item}>
-              {item}
-            </div>
-          );
-        })}
-      </div>*/}
       <pre>{JSON.stringify(reel)}</pre>
       <Button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
