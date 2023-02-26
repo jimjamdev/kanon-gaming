@@ -8,7 +8,7 @@ export function Overlay({
   children?: ReactNode;
 }) {
   return (
-    <div className={[className].join('bg-gray-800 text-white p-4')}>
+    <div className={[className].join('fixed bg-gray-800 text-white p-4')}>
       {children}
     </div>
   );
