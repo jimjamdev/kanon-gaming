@@ -3,7 +3,11 @@ module.exports = {
   mode: 'jit',
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      aspectRatio: {
+        banner: '16 / 5',
+      },
+    },
   },
 
   plugins: [require('@tailwindcss/forms')],

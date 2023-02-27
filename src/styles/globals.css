@@ -5,3 +5,16 @@
 #__next {
     display: contents;
 }
+
+.img span {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.img.rounded-lg span {
+    border-radius: 0.5rem;
+}
+
+.sidebar-nav a {
+    width: 100%;
+}

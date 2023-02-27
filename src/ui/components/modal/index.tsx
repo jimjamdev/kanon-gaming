@@ -12,7 +12,7 @@ export function Modal({
   portalKey?: string;
 }) {
   return (
-    <div className={[className].join('fixed bg-gray-800 text-white p-4')}>
+    <div className={[className].join('bg-white shadow sm:rounded-lg')}>
       {children}
     </div>
   );

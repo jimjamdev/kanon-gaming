@@ -14,7 +14,7 @@ export interface AppLayoutProps {
 
 export function AppLayout({ children }: AppLayoutProps) {
   return (
-    <div className={styles.layout}>
+    <div className={[styles.layout, 'bg-white'].join(' ')}>
       <AppHeader className={styles.header} />
       <Sidebar className={styles.sidebar} />
       <Main className={styles.main}>{children}</Main>

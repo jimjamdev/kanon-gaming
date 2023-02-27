@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { SlotsGame } from '@/features/games/slots-game';
 import { wrapper } from '@/store';
 import { getGames } from '@/store/api/games';
 import { GameList } from '@/features/game-list';
@@ -26,7 +25,6 @@ export default function Home() {
       </Head>
       <Banner />
       <ContentContainer>
-        <SlotsGame />
         <GameList />
       </ContentContainer>
     </>
