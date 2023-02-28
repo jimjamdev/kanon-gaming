@@ -23,7 +23,10 @@ export function SidebarNavItem({
 
   return (
     <div className={classNames}>
-      <Link href={href}>{text}</Link>
+      <Link href={href}>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+        <a className="w-full text-shadow">{text}</a>
+      </Link>
     </div>
   );
 }

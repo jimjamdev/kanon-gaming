@@ -1,8 +1,16 @@
+import clsx from 'clsx';
+import Link from 'next/link';
+
 export function Footer({ className }: { className?: string }) {
+  const classNames = clsx('flex w-full md:hidden', className);
+
   return (
-    <footer className={className}>
-      <div className="bg-gray-800 text-white p-4">
-        <h2 className="text-xl">Footer</h2>
+    <footer className={classNames}>
+      <div className="w-full bg-white text-white p-4">
+        <Link href="/">
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+          <a className="text-gray-500">Home</a>
+        </Link>
       </div>
     </footer>
   );
