@@ -11,5 +11,5 @@ export function ModalContent({
 }) {
   const classNames = clsx('bg-white rounded-lg shadow-lg', className);
 
-  return <div className={classNames}>{children}</div>;
+  return <main className={classNames}>{children}</main>;
 }

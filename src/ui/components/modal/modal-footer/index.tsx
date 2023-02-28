@@ -11,5 +11,5 @@ export function ModalFooter({
 }) {
   const classNames = clsx('flex justify-end', className);
 
-  return <div className={classNames}>{children}</div>;
+  return <footer className={classNames}>{children}</footer>;
 }

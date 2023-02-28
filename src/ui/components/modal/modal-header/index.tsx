@@ -12,11 +12,11 @@ export function ModalHeader({
 }) {
   const { closePortal } = usePortal();
   return (
-    <div className={[className].join('bg-gray-800 text-white p-4')}>
+    <header className={[className].join('bg-gray-800 text-white p-4')}>
       <button onClick={() => closePortal(portalKey)} type="button">
         close
       </button>
       {children}
-    </div>
+    </header>
   );
 }

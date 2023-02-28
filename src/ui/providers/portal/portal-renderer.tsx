@@ -1,15 +1,28 @@
-import { Portal } from '@/ui/components/portal';
+import type { ComponentType } from 'react';
 import { usePortal } from '@/ui/providers/portal/hook';
-import type { TPortal } from '.';
+import type { TPortal } from '@/ui/providers/portal/context';
+import { Portal } from '@/ui/components/portal';
 
-export function PortalRenderer() {
-  const { portals } = usePortal();
+export function PortalRenderer({
+  portalsList,
+}: {
+  portalsList: ComponentType;
+}) {
+  const { portals = [], closePortal } = usePortal();
   return (
     <>
-      {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
-      {portals.map((portal: TPortal) => (
-        <Portal key={portal.key}>{portal.props}</Portal>
-      ))}
+      {portals
+        ? portals?.map((portal: TPortal) => {
+            const { portalKey = '' } = portal;
+            // @ts-expect-error - type
+            const PortalComponent = portalsList[portalKey];
+            return (
+              <Portal isOpen key={portalKey}>
+                <PortalComponent {...portal.props} closePortal={closePortal} />
+              </Portal>
+            );
+          })
+        : null}
     </>
   );
 }

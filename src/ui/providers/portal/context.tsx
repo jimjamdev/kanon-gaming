@@ -1,11 +1,8 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import type {Consumer, Provider} from "react";
-import { createContext} from "react";
+import type { Consumer, Provider } from 'react';
+import { createContext } from 'react';
 
 export interface TPortal {
-  key: string;
+  [portalKey: string]: any;
   props: any;
 }
 
@@ -14,6 +11,5 @@ export interface TPortalContext {
   Consumer: Consumer<any>;
   portals?: TPortal[];
 }
-
 
 export const PortalContext: TPortalContext = createContext({});

@@ -7,6 +7,9 @@ module.exports = {
       aspectRatio: {
         banner: '16 / 5',
       },
+      colors: {
+        transparent: 'rgba(0, 0, 0, 0.95)',
+      },
     },
   },
 

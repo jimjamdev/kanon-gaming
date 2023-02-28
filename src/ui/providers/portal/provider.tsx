@@ -1,25 +1,30 @@
-import type { ReactNode} from 'react';
+import type { ReactNode } from 'react';
 import { useCallback, useState } from 'react';
-import type { TPortal } from './context';
-import { PortalContext } from './context';
+import type { TPortal } from '@/ui/providers/portal/context';
+import { PortalContext } from '@/ui/providers/portal/context';
 
 export function PortalProvider({ children }: { children: ReactNode }) {
   const [portals, setPortals] = useState<TPortal[]>([]);
 
   const openPortal = useCallback(
-    (key: string, props: never) => {
-      setPortals((prevPortals) => [...prevPortals, { key, props }]);
+    (portalKey: string, props: any) => {
+      if (!portals.find((portal) => portal.portalKey === portalKey)) {
+        setPortals((prevPortals) => [
+          ...prevPortals,
+          { portalKey, props: { portalKey, ...props } },
+        ]);
+      }
     },
-    [setPortals]
+    [portals, setPortals],
   );
 
   const closePortal = useCallback(
-    (key: string) => {
+    (portalKey: string) => {
       setPortals((prevPortals) =>
-        prevPortals.filter((portal) => portal.key !== key)
+        prevPortals.filter((portal) => portal.portalKey !== portalKey),
       );
     },
-    [setPortals]
+    [setPortals],
   );
 
   return (

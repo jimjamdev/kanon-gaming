@@ -8,7 +8,8 @@ import fetch, { Headers, Request, Response } from 'node-fetch';
 import type { PageProps } from '@/types/common/page.type';
 import { AppLayout } from '@/components/layouts/app';
 import { store, wrapper } from '@/store';
-import { PortalProvider } from '@/ui/providers/portal';
+import { PortalProvider, PortalRenderer } from '@/ui/providers/portal';
+import { portalsList } from '@/components/modals/portals-list';
 // eslint-disable-next-line, @typescript-eslint/no-unsafe-assignment
 
 Object.assign(globalThis, {
@@ -31,6 +32,7 @@ export function App({ Component, pageProps }: ApplicationType): ReactNode {
       <Provider store={store}>
         {getLayout(<Component {...pageProps} />)}
       </Provider>
+      <PortalRenderer portalsList={portalsList} />
     </PortalProvider>
   );
 }

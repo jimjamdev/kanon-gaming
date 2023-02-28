@@ -13,7 +13,6 @@ export const baseApi = createApi({
 
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       return action.payload[reducerPath];
     }
   },
