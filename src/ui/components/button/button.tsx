@@ -19,7 +19,7 @@ export function Button({
   ...props
 }: ButtonProps): JSX.Element {
   const classNames = clsx(
-    'bg-blue-500 hover:bg-blue-700 text-white font-bold uppercase text-shadow',
+    'bg-blue-500 hover:bg-blue-700 text-white font-bold uppercase text-shadow-md',
     rounded && 'rounded',
     size === 'sm' && 'text-sm px-1 px-2 min-w-[80px]',
     size === 'md' && 'text-base py-2 px-4 min-w-[100px]',
