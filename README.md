@@ -1,12 +1,14 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Kanon Gaming Demo
+## Kanon Gaming Demo [https://kanon-gaming.vercel.app](https://kanon-gaming.vercel.app/)
+
 - [x] Next.js 12 - 13 still iffy
 - [x] Redux Toolkit with redux wrapper
 - [x] 100 Performance Score
 - [x] Tailwind - this was a bad idea
 - [x] Typescript / Eslint / Prettier
 - [x] PWA - Install on your phone and use it like an app
+- [x] Moved JSON to an API for full toolkit and SSR support
 
 ![Lighthouse Score](/public/stats/lighthouse.png)
 
