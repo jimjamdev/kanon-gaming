@@ -5,8 +5,8 @@ export function calculateWinnings({
   symbol = '',
   winMatchAwards,
 }: {
-  count?: number;
-  symbol?: string;
+  count: number;
+  symbol: string;
   winMatchAwards: MatchRewards;
 }) {
   return winMatchAwards?.[symbol]?.[count] || 0;

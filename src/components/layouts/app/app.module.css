@@ -1,0 +1,32 @@
+/** Apparently tailwind can't handle this, so we create our own css module */
+
+.layout {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+            "sidebar header"
+            "sidebar main"
+            "sidebar footer";
+    min-height: 100svh;
+    position: relative;
+}
+
+.header {
+    grid-area: header;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+.main {
+    grid-area: main;
+}
+
+.footer {
+    grid-area: footer;
+}

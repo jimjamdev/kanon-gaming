@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function useFilterData<T>(data?: T[], search = '') {
+export function useFilterData<T>(data: T[] | undefined, search = ''): T[] | undefined {
   const [filteredData, setFilteredData] = useState<T[] | undefined>(data);
 
   useEffect(() => {

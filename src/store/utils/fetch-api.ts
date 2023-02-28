@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function fetchApi(url: string, options: RequestInit = {}): Promise<any> {
   const headers = {
     'Content-Type': 'application/json',

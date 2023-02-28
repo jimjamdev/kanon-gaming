@@ -1,109 +1,148 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { randomizeSlotItems } from '@/features/games/utils/randomize-slot-items';
 import { winsInReel } from '@/features/games/utils/wins-in-reel';
 import { pickOneFromEachArray } from '@/features/games/utils/pick-one-from-each-array';
 import { calculateWinnings } from '@/features/games/utils/calculate-winnings';
-import type { UseSlot } from '@/features/games/hooks/use-slots/use.slots.types';
+
+type WinMatchAwards = Record<string, Record<number, number>>;
+
+interface UseSlotsProps {
+  slotList?: string[][];
+  creditsAmount: number;
+  creditCostPerSpin: number;
+  winMatchAwards: WinMatchAwards;
+}
+
+interface UseSlots {
+  handleSpin: () => void;
+  isWin: boolean;
+  totalWins: number;
+  availableCredits: number;
+  message:
+    | { type: 'error'; text: string }
+    | { type: 'warning'; text: string }
+    | { type: 'info'; text: string }
+    | undefined;
+  reel: string[] | undefined;
+  roundWinAmount: number;
+  totalWinningsAmount: number;
+  totalLossesAmount: number;
+  totalLosses: number;
+  roundLossAmount: number;
+}
 
 export function useSlots({
   slotList,
   creditsAmount = 20,
   creditCostPerSpin = 1,
   winMatchAwards,
-}: UseSlot) {
-  const [reel, setReel] = useState<string[] | []>();
-  const [availableCredits, setAvailableCredits] = useState(creditsAmount);
-  const [totalWins, setTotalWins] = useState(0);
-  const [totalLosses, setTotalLosses] = useState(0);
-  const [isWin, setIsWin] = useState(false);
-  const [roundWinAmount, setRoundWinAmount] = useState(0);
-  const [roundLossAmount, setRoundLossAmount] = useState(0);
-  const [totalWinningsAmount, setTotalWinningsAmount] = useState(0);
-  const [totalLossesAmount, setTotalLossesAmount] = useState(0);
+}: UseSlotsProps): UseSlots {
+  const [reel, setReel] = useState<string[] | undefined>(undefined);
+  const [availableCredits, setAvailableCredits] =
+    useState<number>(creditsAmount);
+  const [totalWins, setTotalWins] = useState<number>(0);
+  const [totalLosses, setTotalLosses] = useState<number>(0);
+  const [isWin, setIsWin] = useState<boolean>(false);
+  const [roundWinAmount, setRoundWinAmount] = useState<number>(0);
+  const [roundLossAmount, setRoundLossAmount] = useState<number>(0);
+  const [totalWinningsAmount, setTotalWinningsAmount] = useState<number>(0);
+  const [totalLossesAmount, setTotalLossesAmount] = useState<number>(0);
   const [message, setMessage] = useState<
-    { type: 'error' | 'warning' | 'info'; text: string } | undefined
-  >();
+    | { type: 'error'; text: string }
+    | { type: 'warning'; text: string }
+    | { type: 'info'; text: string }
+    | undefined
+  >(undefined);
 
   const hasAvailableCredits = availableCredits >= creditCostPerSpin;
-  const matchAwardsMemoized = useMemo(() => winMatchAwards, [winMatchAwards]);
-  const winsInReelMemoized = useMemo(() => winsInReel, []);
-  const calculateWinningsMemoized = useMemo(() => calculateWinnings, []);
-  const pickOneFromEachArrayMemoized = useMemo(() => pickOneFromEachArray, []);
 
-  const spinReel = useCallback(
-    function spinReel() {
-      if (!slotList) return;
-      // @ts-expect-error - until i fix type
-      const randomizeSlots = randomizeSlotItems({ slotItems: slotList });
-      const newReel = pickOneFromEachArrayMemoized({
-        array: randomizeSlots,
-      }) as string[];
-      setReel(newReel);
-    },
-    [slotList, pickOneFromEachArrayMemoized],
+  const randomizeSlots = useCallback(
+    () => randomizeSlotItems({ slotItems: slotList }),
+    [slotList],
   );
 
-  useEffect(() => {
-    spinReel();
-  }, [slotList, spinReel]);
+  const pickOneFromEachArrayCallback = useCallback(
+    () => pickOneFromEachArray({ array: randomizeSlots() }) as string[],
+    [randomizeSlots],
+  );
 
-  useEffect(() => {
-    const wins = winsInReelMemoized({ reel });
-    const credits = calculateWinningsMemoized({
-      ...wins,
-      winMatchAwards: matchAwardsMemoized,
-    });
-    if (wins?.count) {
-      setIsWin(true);
-      setRoundWinAmount(credits);
-      setRoundLossAmount(0);
-    } else {
-      setRoundWinAmount(0);
-      setRoundLossAmount(creditCostPerSpin);
-      setIsWin(false);
-    }
-  }, [
-    creditCostPerSpin,
-    matchAwardsMemoized,
-    reel,
-    calculateWinningsMemoized,
-    winsInReelMemoized,
-  ]);
-
-  useEffect(() => {
-    if (roundWinAmount > 0) {
-      setTotalWinningsAmount((prev) => prev + roundWinAmount);
-      setTotalWins((prev) => prev + 1);
-    }
-  }, [roundWinAmount]);
-
-  useEffect(() => {
-    if (roundLossAmount > 0) {
-      setTotalLossesAmount((prev) => prev + roundLossAmount);
-      setTotalLosses((prev) => prev + 1);
-    }
-  }, [roundLossAmount]);
+  const calculateWinningsCallback = useCallback(
+    (wins: { count: number; symbol: string }) =>
+      calculateWinnings({ ...wins, winMatchAwards }),
+    [winMatchAwards],
+  );
 
   const handleSpin = useCallback(() => {
     if (!hasAvailableCredits) {
       setMessage({ type: 'error', text: 'Not enough credits' });
       return;
     }
-    setAvailableCredits((prev) => prev - creditCostPerSpin);
-    spinReel();
-  }, [hasAvailableCredits, spinReel, creditCostPerSpin]);
 
-  return {
-    availableCredits,
-    isWin,
+    setAvailableCredits((prev) => prev - creditCostPerSpin);
+    const newReel = pickOneFromEachArrayCallback();
+    setReel(newReel);
+
+    const wins = winsInReel({ reel: newReel }) as {
+      count: number;
+      symbol: string;
+    };
+
+    const credits = calculateWinningsCallback(wins);
+
+    if (credits !== 0) {
+      setIsWin(true);
+      setRoundWinAmount(credits);
+      setRoundLossAmount(0);
+    } else {
+      setIsWin(false);
+      setRoundWinAmount(0);
+      setRoundLossAmount(creditCostPerSpin);
+    }
+  }, [
+    hasAvailableCredits,
+    creditCostPerSpin,
+    pickOneFromEachArrayCallback,
+    calculateWinningsCallback,
+    setReel,
+  ]);
+
+  useEffect(() => {
+    if (roundWinAmount) {
+      setTotalWinningsAmount((prev) => prev + roundWinAmount);
+      setTotalWins((prev) => prev + 1);
+    }
+
+    if (roundLossAmount) {
+      setTotalLossesAmount((prev) => prev + roundLossAmount);
+      setTotalLosses((prev) => prev + 1);
+    }
+  }, [roundWinAmount, roundLossAmount, isWin, reel]);
+
+  useEffect(() => {
+    // This will run every time to force re-render on values that don't change
+  }, [
+    reel,
     totalWins,
     totalLosses,
-    reel,
-    message,
+    totalWinningsAmount,
+    totalLossesAmount,
+    roundLossAmount,
+    roundWinAmount,
+    isWin,
     handleSpin,
+  ]);
+
+  return {
+    handleSpin,
+    isWin,
+    totalWins,
+    availableCredits,
+    message,
+    reel,
     roundWinAmount,
     totalWinningsAmount,
     roundLossAmount,
     totalLossesAmount,
+    totalLosses,
   };
 }
