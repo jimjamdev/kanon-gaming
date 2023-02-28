@@ -11,8 +11,8 @@ export function GameModal({
   return (
     <Overlay>
       <Modal>
-        <Modal.Header portalKey={portalKey}>Game</Modal.Header>
-        <Modal.Content>
+        <Modal.Header portalKey={portalKey}>Slots Game</Modal.Header>
+        <Modal.Content className="p-4">
           <SlotsGame />
         </Modal.Content>
         <Modal.Footer>Gambling Aware</Modal.Footer>
@@ -21,5 +21,4 @@ export function GameModal({
   );
 }
 
-// eslint-disable-next-line import/no-default-export
 export default GameModal;

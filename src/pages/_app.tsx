@@ -37,5 +37,5 @@ export function App({ Component, pageProps }: ApplicationType): ReactNode {
   );
 }
 
-// eslint-disable-next-line import/no-default-export
+ 
 export default wrapper.withRedux(App);

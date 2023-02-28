@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-named-as-default
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
 
@@ -15,16 +14,16 @@ export function Button({
   children,
   className,
   onClick,
-  size,
+  size = 'md',
   rounded,
   ...props
 }: ButtonProps): JSX.Element {
   const classNames = clsx(
-    'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4',
+    'bg-blue-500 hover:bg-blue-700 text-white font-bold uppercase',
     rounded && 'rounded',
-    size === 'sm' && 'text-sm',
-    size === 'md' && 'text-base',
-    size === 'lg' && 'text-lg',
+    size === 'sm' && 'text-sm px-1 px-2 min-w-[80px]',
+    size === 'md' && 'text-base py-2 px-4 min-w-[100px]',
+    size === 'lg' && 'text-lg py-4 px-6 min-w-[150px]',
     className,
   );
 

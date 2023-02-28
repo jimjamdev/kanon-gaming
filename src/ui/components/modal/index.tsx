@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-// eslint-disable-next-line import/no-named-as-default
 import clsx from 'clsx';
 import { ModalHeader } from '@/ui/components/modal/modal-header';
 import { ModalContent } from '@/ui/components/modal/modal-content';
@@ -13,7 +12,10 @@ export function Modal({
   children?: ReactNode;
   portalKey?: string;
 }) {
-  const classNames = clsx('bg-white rounded-lg shadow-lg', className);
+  const classNames = clsx(
+    'bg-white rounded-lg shadow-lg overflow-hidden min-w-[50vw] max-w-[90vw]',
+    className,
+  );
 
   return <aside className={classNames}>{children}</aside>;
 }

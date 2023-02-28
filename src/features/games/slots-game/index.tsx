@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { useGetSlotsQuery } from '@/store/api/slots';
 import { Button } from '@/ui/components/button/button';
 import type { Slots } from '@/types/slots.types';
@@ -5,6 +6,12 @@ import { useSlots } from '../hooks/use-slots';
 
 export function SlotsGame() {
   const { data } = useGetSlotsQuery();
+  const fruits = {
+    cherry: '🍒',
+    lemon: '🍋',
+    apple: '🍎',
+    banana: '🍌',
+  };
 
   const {
     handleSpin,
@@ -46,15 +53,22 @@ export function SlotsGame() {
     },
   });
 
+  function renderReels() {
+    return reel ? (
+      reel.map((item) => {
+        const key = uuidv4();
+        // @ts-expect-error - typescript doesn't like the dynamic key
+        return <span key={key}>{fruits[item]}</span>;
+      })
+    ) : (
+      <div>SPIN TO START</div>
+    );
+  }
+
   return (
     <div>
-      <h1>Slots</h1>
-      <pre>{JSON.stringify(reel)}</pre>
-      <Button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={handleSpin}
-        type="button"
-      >
+      {renderReels()}
+      <Button onClick={handleSpin} rounded size="lg" type="button">
         Spin
       </Button>
       credits: {availableCredits}

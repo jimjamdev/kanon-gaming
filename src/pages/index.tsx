@@ -3,7 +3,7 @@ import { getGames } from '@/store/api/games';
 import { GameList } from '@/features/game-list';
 import { Banner } from '@/components/banner';
 import { ContentContainer } from '@/components/content-container';
-// eslint-disable-next-line import/no-default-export
+ 
 export default function Home() {
   return (
     <>
