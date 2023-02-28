@@ -7,7 +7,6 @@ interface GameThumbnailProps extends Game {
 }
 
 export function GameThumbnail({ title, thumb, slug }: GameThumbnailProps) {
-  console.log('title', title, slug);
   return (
     <div className="aspect-square">
       <Link href={`/games/game/${slug || ''}`}>
@@ -18,7 +17,7 @@ export function GameThumbnail({ title, thumb, slug }: GameThumbnailProps) {
             className="aspect-square object-contain rounded-lg shadow-sm"
             height={280}
             priority
-            src={thumb?.url ? `https:${thumb.url}` : '/vercel.svg'}
+            src={thumb?.url ? `https:${thumb.url}` : '/images/fallback.webp'}
             width={280}
           />
         </a>
