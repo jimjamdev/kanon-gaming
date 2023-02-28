@@ -2,11 +2,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { useGetSlotsQuery } from '@/store/api/slots';
 import { Button } from '@/ui/components/button/button';
 import type { Slots } from '@/types/slots.types';
+import { InfoLabel } from '@/features/games/slots-game/info-label';
 import { useSlots } from '../hooks/use-slots';
 
 export function SlotsGame() {
   const { data } = useGetSlotsQuery();
-  const fruits = {
+  type Fruits = Record<string, string>;
+  const fruits: Fruits = {
     cherry: '🍒',
     lemon: '🍋',
     apple: '🍎',
@@ -15,7 +17,6 @@ export function SlotsGame() {
 
   const {
     handleSpin,
-    isWin,
     totalWins,
     availableCredits,
     message,
@@ -37,8 +38,8 @@ export function SlotsGame() {
       },
       lemon: {
         0: 0,
-        2: 20,
-        3: 30,
+        2: 0,
+        3: 3,
       },
       apple: {
         0: 0,
@@ -57,28 +58,37 @@ export function SlotsGame() {
     return reel ? (
       reel.map((item) => {
         const key = uuidv4();
-        // @ts-expect-error - typescript doesn't like the dynamic key
-        return <span key={key}>{fruits[item]}</span>;
+        return (
+          <span className="p-4 text-7xl h-[100px]" key={key}>
+            {fruits[item]}
+          </span>
+        );
       })
     ) : (
-      <div>SPIN TO START</div>
+      <div className="flex items-center justify-center p-4 text-2xl md:text-4xl text-center h-[100px]">
+        SPIN TO START
+      </div>
     );
   }
 
   return (
     <div>
-      {renderReels()}
+      <div className="flex items-center justify-around bg-blue-300 rounded-lg">
+        {renderReels()}
+      </div>
+      <div className="text-red-500">{message?.text}</div>
+      <div className="grid grid-cols-3 md: grid-cols-7">
+        <InfoLabel label="Credits" value={availableCredits} />
+        <InfoLabel label="Wins" value={totalWins} />
+        <InfoLabel label="Losses" value={totalLosses} />
+        <InfoLabel label="Round Win" value={`$${roundWinAmount}`} />
+        <InfoLabel label="Round Loss" value={`$${roundLossAmount}`} />
+        <InfoLabel label="Total Wins" value={`$${totalWinningsAmount}`} />
+        <InfoLabel label="TotalLosses" value={`$${totalLossesAmount}`} />
+      </div>
       <Button onClick={handleSpin} rounded size="lg" type="button">
         Spin
       </Button>
-      credits: {availableCredits}
-      <div className="text-red-500">{message?.text}</div>
-      <p>win: {isWin ? 'true' : 'false'}</p>
-      <p>total wins: {totalWins}</p> / losses {totalLosses}
-      <p>round won: </p> ${roundWinAmount} / round lost ${roundLossAmount}
-      <p>
-        total amount won: ${totalWinningsAmount} / lost ${totalLossesAmount}
-      </p>
     </div>
   );
 }

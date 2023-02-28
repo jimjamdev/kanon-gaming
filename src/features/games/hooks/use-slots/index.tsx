@@ -86,9 +86,10 @@ export function useSlots({
       count: number;
       symbol: string;
     };
+
     const credits = calculateWinningsCallback(wins);
 
-    if (wins.count) {
+    if (credits !== 0) {
       setIsWin(true);
       setRoundWinAmount(credits);
       setRoundLossAmount(0);
@@ -115,7 +116,21 @@ export function useSlots({
       setTotalLossesAmount((prev) => prev + roundLossAmount);
       setTotalLosses((prev) => prev + 1);
     }
-  }, [roundWinAmount, roundLossAmount, setTotalLossesAmount, setTotalLosses]);
+  }, [roundWinAmount, roundLossAmount, isWin, reel]);
+
+  useEffect(() => {
+    // This will run every time to force re-render on values that don't change
+  }, [
+    reel,
+    totalWins,
+    totalLosses,
+    totalWinningsAmount,
+    totalLossesAmount,
+    roundLossAmount,
+    roundWinAmount,
+    isWin,
+    handleSpin,
+  ]);
 
   return {
     handleSpin,

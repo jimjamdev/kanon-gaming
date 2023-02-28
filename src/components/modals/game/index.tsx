@@ -10,7 +10,7 @@ export function GameModal({
 }) {
   return (
     <Overlay>
-      <Modal>
+      <Modal portalKey={portalKey}>
         <Modal.Header portalKey={portalKey}>Slots Game</Modal.Header>
         <Modal.Content className="p-4">
           <SlotsGame />

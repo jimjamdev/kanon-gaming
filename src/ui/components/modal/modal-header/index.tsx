@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import clsx from 'clsx';
-import { XCircleIcon } from '@heroicons/react/24/outline';
 import { usePortal } from '@/ui/providers/portal';
 
 export function ModalHeader({
