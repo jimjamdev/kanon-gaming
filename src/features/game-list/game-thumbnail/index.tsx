@@ -7,6 +7,7 @@ interface GameThumbnailProps extends Game {
 }
 
 export function GameThumbnail({ title, thumb, slug }: GameThumbnailProps) {
+  console.log('title', title, slug);
   return (
     <div className="aspect-square">
       <Link href={`/games/game/${slug || ''}`}>
