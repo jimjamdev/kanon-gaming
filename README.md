@@ -1,6 +1,37 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Kanon Gaming Demo
+- [x] Next.js 12 - 13 still iffy
+- [x] Redux Toolkit with redux wrapper
+- [x] 100 Performance Score
+- [x] Tailwind - this was a bad idea
+- [x] Typescript / Eslint / Prettier
+- [x] PWA - Install on your phone and use it like an app
+
+![Lighthouse Score](/public/stats/lighthouse.png)
+
+```bash
+total time: roughtyly 24h split over a couple of weeks
+```
+## Notes
+So, I was hoping to do a little more. But full time work and part-time consultancy didn't leave me enough hours. So I was split a few hours here, a few hours there,
+
+- I wanted to see what the fuss is about with tailwind. I regretted that. It's quicker for me to write my own CSS or plan and build based on a design system in SASS, CSS-IN-JS
+- There's some examples of components, but not enough. Normally if I'm using SASS and use clsx to switch styles based on props. There's a small example in ui/component/button
+- Usually i'd have something like: ```<Button variant="primary" size="large" />```.
+- Tailwind is going to involve doing this for everything, button, typography, grid, etc.
+- I wanted to use the new Next.js Image component, but with 12 had to use the older one with the beautiful extra spans.
+- Click the button on the banner to play the game
+## Casino Epic Test
+![Lighthouse Score](/public/stats/casinoepic.png)
+You have some big issues on your casinos. This is just for casino epic, but it seems be prevalent across the board.
+- Loading times are very slow - 12s to interactive :/
+- Your SSR or SGG is not working or has been disabled. You need to be able to serve your pages to the user as fast as possible. This is a big issue.
+- Next.js is good for when you really need performance, if you're using it, make use of the features the framework as to offer. You may as well be using create-react-app XD
+- Seems to have bugs coming in and out of mobile view. Sidebar disappears and doesn't come back.
+- Looks nice enough. Quite like the colors and clean sidebar.
+
+##` Getting Started
 
 First, run the development server:
 
